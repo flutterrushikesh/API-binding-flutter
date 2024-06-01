@@ -27,8 +27,22 @@ class _MainScreenState extends State {
             return Padding(
               padding: const EdgeInsets.all(15),
               child: Container(
-                child: Column(
-                  children: [Text(empData[index]['employee_name'])],
+                child: Row(
+                  children: [
+                    Text("Name: ${empData[index]['employee_name']}"),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    Text("Salary: ${empData[index]['employee_salary']}"),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    Text("Age: ${empData[index]['employee_age']}"),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    Text("Id: ${empData[index]['id']}")
+                  ],
                 ),
               ),
             );
