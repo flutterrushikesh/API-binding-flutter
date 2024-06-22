@@ -16,6 +16,7 @@ class _MainScreenState extends State {
   @override
   void initState() {
     getProductData();
+    super.initState();
   }
 
   void getProductData() async {
