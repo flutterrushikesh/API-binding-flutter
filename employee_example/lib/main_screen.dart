@@ -13,18 +13,17 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('API Binding'),
-        backgroundColor: Colors.blue,
-        centerTitle: true,
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          getEmployeeData();
-        },
-        label: const Text("Show Data"),
-      ),
-    );
+        appBar: AppBar(
+          title: const Text('API Binding'),
+          backgroundColor: Colors.blue,
+          centerTitle: true,
+        ),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {
+            getEmployeeData();
+          },
+          label: const Text("Show Data"),
+        ));
   }
 
   void getEmployeeData() async {
