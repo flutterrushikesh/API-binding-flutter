@@ -31,60 +31,6 @@ class _MainScreenState extends State {
     });
   }
 
-  // Widget validateMap() {
-  //   if (productMap.isNotEmpty) {
-  //     return Container(
-  //       padding: const EdgeInsets.all(15),
-  //       child: Column(
-  //         crossAxisAlignment: CrossAxisAlignment.start,
-  //         children: [
-  //           Text(
-  //             productMap['title'],
-  //             style: const TextStyle(
-  //               fontSize: 18,
-  //               fontWeight: FontWeight.w700,
-  //             ),
-  //           ),
-  //           const SizedBox(
-  //             height: 10,
-  //           ),
-  //           Text(
-  //             productMap['description'],
-  //             style: const TextStyle(
-  //               fontSize: 15,
-  //               fontWeight: FontWeight.w500,
-  //             ),
-  //           ),
-  //           const SizedBox(
-  //             height: 10,
-  //           ),
-  //           Row(
-  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //             children: [
-  //               Text(
-  //                 productMap['category'],
-  //                 style: const TextStyle(
-  //                   fontSize: 15,
-  //                   fontWeight: FontWeight.w500,
-  //                 ),
-  //               ),
-  //               Text(
-  //                 '₹ ${productMap['price']}',
-  //                 style: const TextStyle(
-  //                   fontSize: 15,
-  //                   fontWeight: FontWeight.w500,
-  //                 ),
-  //               ),
-  //             ],
-  //           ),
-  //         ],
-  //       ),
-  //     );
-  //   } else {
-  //     return Center();
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
