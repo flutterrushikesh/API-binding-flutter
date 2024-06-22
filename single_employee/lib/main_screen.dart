@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -11,7 +12,15 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  List productData = [];
+
   @override
+  @override
+  void initState() {
+    getEmployeeData();
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -19,19 +28,46 @@ class _MainScreenState extends State<MainScreen> {
         backgroundColor: Colors.blue,
         centerTitle: true,
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          getEmployeeData();
-        },
-        label: const Text("Show Data"),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListView.builder(
+          itemCount: productData.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Container(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    productData[index]['title'],
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  Text(productData[index]['description'])
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }
 
   void getEmployeeData() async {
-    Uri url = Uri.parse('	https://dummy.restapiexample.com/api/v1/employee/1');
+    Uri url = Uri.parse(
+      'https://dummyjson.com/products',
+    );
 
     http.Response response = await http.get(url);
-    log('$response');
+    // log(response.body);
+
+    var responseData = json.decode(response.body);
+    log("$responseData");
+
+    setState(() {
+      productData = responseData['products'];
+    });
   }
 }
