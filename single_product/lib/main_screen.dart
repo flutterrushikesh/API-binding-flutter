@@ -39,7 +39,13 @@ class _MainScreenState extends State {
         centerTitle: true,
         backgroundColor: Colors.blue,
       ),
-      body: Container(
+      body: validateMap(),
+    );
+  }
+
+  Widget validateMap() {
+    if (productMap.isNotEmpty) {
+      return Container(
         padding: const EdgeInsets.all(15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,7 +91,17 @@ class _MainScreenState extends State {
             ),
           ],
         ),
-      ),
-    );
+      );
+    } else {
+      return const Center(
+        child: Text(
+          'Wait for load data',
+          style: TextStyle(
+            fontSize: 40,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      );
+    }
   }
 }
