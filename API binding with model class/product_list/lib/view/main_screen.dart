@@ -109,8 +109,10 @@ class _MainScreenState extends State {
 
     ProductModel productModelObj = ProductModel(responseData);
     log("$responseData");
-    setState(() {
-      productModelList = productModelObj.productDetails!;
-    });
+    setState(
+      () {
+        productModelList = productModelObj.productDetails!;
+      },
+    );
   }
 }
