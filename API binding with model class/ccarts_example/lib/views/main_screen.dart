@@ -1,10 +1,8 @@
-import 'dart:convert';
 import 'dart:developer';
-import 'package:ccarts_example/models/cart_model.dart';
+import 'package:ccarts_example/controller/api_binding_controller.dart';
 import 'package:ccarts_example/models/multiplecarts_model.dart';
 import 'package:ccarts_example/views/history_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -53,27 +51,27 @@ class _MainScreenState extends State {
           );
         },
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          setState(() {});
+          getDataforLocal();
+        },
+        label: const Text('Show Data'),
+      ),
     );
   }
 
   @override
   void initState() {
-    getCartData();
+    getDataforLocal();
     super.initState();
   }
 
-  void getCartData() async {
-    Uri url = Uri.parse('https://dummyjson.com/carts');
-
-    http.Response response = await http.get(url);
-    // log(response.body);
-
-    var responseJson = json.decode(response.body);
-
-    CartModel cartModelobj = CartModel(responseJson);
-    setState(() {
-      cartModelObjList = cartModelobj.multipleCartsModellist!;
-      log('$cartModelObjList');
-    });
+  getDataforLocal() async {
+    List<MultipleCartsModel> localList = await getCartData();
+    for (int i = 0; i <= cartModelObjList.length; i++) {
+      cartModelObjList.add(localList[i]);
+      log("${localList[i]}");
+    }
   }
 }
