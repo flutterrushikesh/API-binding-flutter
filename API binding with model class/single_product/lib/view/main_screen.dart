@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:single_product/controller/api_binding_controller.dart';
 import 'package:single_product/model/product_model.dart';
 
 class MainScreen extends StatefulWidget {
@@ -17,8 +18,13 @@ class _MainScreen extends State {
 
   @override
   void initState() {
-    getProductDetails();
+    getProductDetailsLocally();
     super.initState();
+  }
+
+  void getProductDetailsLocally() async {
+    ProductModel localObj = await getProductDetails();
+    productModelfillObj = localObj;
   }
 
   @override
@@ -34,7 +40,21 @@ class _MainScreen extends State {
         centerTitle: true,
         backgroundColor: Colors.blue,
       ),
-      body: Container(
+      body: validateObj(),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          setState(() {
+            getProductDetailsLocally();
+          });
+        },
+        label: const Text("Show Data"),
+      ),
+    );
+  }
+
+  Widget validateObj() {
+    if (productModelfillObj != null) {
+      return Container(
         height: 170,
         margin: const EdgeInsets.all(10),
         padding: const EdgeInsets.all(10),
@@ -91,24 +111,11 @@ class _MainScreen extends State {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  void getProductDetails() async {
-    Uri url = Uri.parse('https://dummyjson.com/products/1');
-
-    http.Response response = await http.get(url);
-
-    var responseData = json.decode(response.body);
-    // log(response.body);
-
-    ProductModel productModelObj = ProductModel(responseData);
-    setState(
-      () {
-        productModelfillObj = productModelObj;
-        log('$productModelfillObj');
-      },
-    );
+      );
+    } else {
+      return const Center(
+        child: Text("No data available"),
+      );
+    }
   }
 }
