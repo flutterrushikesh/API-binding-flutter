@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:product_list/controller/api_controller.dart';
 import 'package:product_list/models/product_model.dart';
 
 class MainScreen extends StatefulWidget {
@@ -14,15 +15,9 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State {
   List productModelList = [];
-
-  @override
-  void initState() {
-    getProductData();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
+    log("IN BUILD");
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -83,7 +78,7 @@ class _MainScreenState extends State {
                       ),
                     ),
                     Text(
-                      '₹ ${productModelList[index].price}',
+                      '\$ ${productModelList[index].price}',
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -96,23 +91,24 @@ class _MainScreenState extends State {
           );
         },
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          setState(() {
+            getData();
+          });
+        },
+        label: const Text('Show Data'),
+      ),
     );
   }
 
-  void getProductData() async {
-    Uri url = Uri.parse('https://dummyjson.com/products');
+  void getData() async {
+    dynamic localObj = await getProductData();
+    for (int i = 0; i <= localObj.length; i++) {
+      log('in for loop');
+      productModelList.add(localObj[i]);
+    }
 
-    http.Response response = await http.get(url);
-    // log(response.body);
-    var responseData = json.decode(response.body);
-    // log('$responseData');
-
-    ProductModel productModelObj = ProductModel(responseData);
-    log("$responseData");
-    setState(
-      () {
-        productModelList = productModelObj.productDetails!;
-      },
-    );
+    log('IN MAINSCREEN $productModelList');
   }
 }

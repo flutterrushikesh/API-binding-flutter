@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:ccarts_example/models/product_model.dart';
 
 class MultipleCartsModel {

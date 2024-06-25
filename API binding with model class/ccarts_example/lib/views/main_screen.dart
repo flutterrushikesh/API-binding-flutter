@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:ccarts_example/models/cart_model.dart';
 import 'package:ccarts_example/models/multiplecarts_model.dart';
 import 'package:ccarts_example/views/history_screen.dart';
@@ -47,12 +46,10 @@ class _MainScreenState extends State {
       body: ListView.builder(
         itemCount: cartModelObjList.length,
         itemBuilder: (context, index) {
-          return Container(
-            child: Column(
-              children: [
-                Text("${cartModelObjList[index].totalProducts}"),
-              ],
-            ),
+          return Column(
+            children: [
+              Text("${cartModelObjList[index].alldiscountTotal}"),
+            ],
           );
         },
       ),
