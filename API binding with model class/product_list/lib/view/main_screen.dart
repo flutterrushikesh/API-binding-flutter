@@ -1,10 +1,7 @@
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:product_list/controller/api_controller.dart';
-import 'package:product_list/models/product_model.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -15,6 +12,13 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State {
   List productModelList = [];
+
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     log("IN BUILD");
@@ -85,7 +89,8 @@ class _MainScreenState extends State {
                       ),
                     ),
                   ],
-                )
+                ),
+                // Image.asset()
               ],
             ),
           );
@@ -108,7 +113,5 @@ class _MainScreenState extends State {
       log('in for loop');
       productModelList.add(localObj[i]);
     }
-
-    log('IN MAINSCREEN $productModelList');
   }
 }
