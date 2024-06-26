@@ -90,7 +90,6 @@ class _MainScreenState extends State {
                     ),
                   ],
                 ),
-                // Image.asset()
               ],
             ),
           );
@@ -98,9 +97,7 @@ class _MainScreenState extends State {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          setState(() {
-            getData();
-          });
+          setState(() {});
         },
         label: const Text('Show Data'),
       ),
@@ -108,10 +105,15 @@ class _MainScreenState extends State {
   }
 
   void getData() async {
+    log("IN getData local function");
+    bool validateRequest = true;
+
+    log("In validate request");
     dynamic localObj = await getProductData();
     for (int i = 0; i <= localObj.length; i++) {
       log('in for loop');
       productModelList.add(localObj[i]);
     }
+    validateRequest = false;
   }
 }
