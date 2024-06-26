@@ -1,8 +1,7 @@
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+
 import 'package:single_product/controller/api_binding_controller.dart';
 import 'package:single_product/model/product_model.dart';
 
@@ -22,13 +21,9 @@ class _MainScreen extends State {
     super.initState();
   }
 
-  void getProductDetailsLocally() async {
-    ProductModel localObj = await getProductDetails();
-    productModelfillObj = localObj;
-  }
-
   @override
   Widget build(BuildContext context) {
+    log("IN MainScreen build");
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -117,5 +112,10 @@ class _MainScreen extends State {
         child: Text("No data available"),
       );
     }
+  }
+
+  void getProductDetailsLocally() async {
+    ProductModel localObj = await getProductDetails();
+    productModelfillObj = localObj;
   }
 }

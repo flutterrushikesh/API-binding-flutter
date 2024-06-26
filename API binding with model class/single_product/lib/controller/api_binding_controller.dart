@@ -5,15 +5,24 @@ import 'package:http/http.dart' as http;
 import 'package:single_product/model/product_model.dart';
 
 Future<ProductModel> getProductDetails() async {
-  Uri url = Uri.parse('https://dummyjson.com/products/2');
+  log("in APi Binding");
+  ProductModel? productModelObj;
+  bool validateRequest = false;
 
-  http.Response response = await http.get(url);
+  if (validateRequest == false) {
+    log('request hited');
+    Uri url = Uri.parse('https://dummyjson.com/products/2');
 
-  var responseData = json.decode(response.body);
-  // log(response.body);
+    http.Response response = await http.get(url);
 
-  ProductModel productModelObj = ProductModel(responseData);
+    var responseData = json.decode(response.body);
+    // log(response.body);
 
-  log('$productModelObj');
-  return productModelObj;
+    productModelObj = ProductModel(responseData);
+
+    validateRequest = true;
+  }
+
+  // log('$productModelObj');
+  return productModelObj!;
 }
