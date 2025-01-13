@@ -1,3 +1,4 @@
+import 'package:e_commerce/controller/add_to_cart_controller.dart';
 import 'package:e_commerce/controller/get_all_product_controller.dart';
 import 'package:e_commerce/view/splash_screen/splash_screen.dart';
 
@@ -14,7 +15,8 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(
             create: (context) => GetAllProductController(),
-          )
+          ),
+          ChangeNotifierProvider(create: (context) => AddToCartController()),
         ],
         child: const MaterialApp(
           debugShowCheckedModeBanner: false,

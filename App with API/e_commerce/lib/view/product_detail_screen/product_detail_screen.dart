@@ -38,71 +38,84 @@ class ProductDetailScreen extends StatelessWidget {
               horizontal: WidthResolution.responsiveWidth(
                   context: context, responsiveWidth: 0.04),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  detailsOfProduct.title!,
-                  style: GoogleFonts.poppins(
-                    fontSize: WidthResolution.responsiveWidth(
-                      context: context,
-                      responsiveWidth: 0.04,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    detailsOfProduct.title!,
+                    style: GoogleFonts.poppins(
+                      fontSize: WidthResolution.responsiveWidth(
+                        context: context,
+                        responsiveWidth: 0.04,
+                      ),
+                      fontWeight: FontWeight.w600,
                     ),
-                    fontWeight: FontWeight.w600,
                   ),
-                ),
-                Text(
-                  "${detailsOfProduct.inStock!} In stock",
-                  style: GoogleFonts.poppins(),
-                ),
-                SizedBox(
-                  height: HeightResolution.responsiveHeight(
+                  Text(
+                    "${detailsOfProduct.inStock!} In stock",
+                    style: GoogleFonts.poppins(),
+                  ),
+                  SizedBox(
+                    height: HeightResolution.responsiveHeight(
+                      context: context,
+                      responsiveHeight: 0.1,
+                    ),
+                  ),
+                  _labelText(
+                    lableTitle: "Highlights",
                     context: context,
-                    responsiveHeight: 0.1,
                   ),
-                ),
-                _labelText(
-                  lableTitle: "Highlights",
-                  context: context,
-                ),
-                SizedBox(
-                  height: HeightResolution.responsiveHeight(
-                      context: context, responsiveHeight: 0.05),
-                ),
-                _subLabelText(
-                  sublabelText: "Brand :          ${detailsOfProduct.brand}",
-                  context: context,
-                ),
-                SizedBox(
-                  height: HeightResolution.responsiveHeight(
-                      context: context, responsiveHeight: 0.01),
-                ),
-                _subLabelText(
-                  sublabelText: "Category:     ${detailsOfProduct.category}",
-                  context: context,
-                ),
-                SizedBox(
-                  height: HeightResolution.responsiveHeight(
-                      context: context, responsiveHeight: 0.1),
-                ),
-                _labelText(lableTitle: "Information", context: context),
-                SizedBox(
-                  height: HeightResolution.responsiveHeight(
-                      context: context, responsiveHeight: 0.05),
-                ),
-                _subLabelText(
-                  sublabelText: "Description: ${detailsOfProduct.description}",
-                  context: context,
-                ),
-                SizedBox(
-                  height: HeightResolution.responsiveHeight(
-                      context: context, responsiveHeight: 0.05),
-                ),
-                _subLabelText(
-                  sublabelText: "Warrenty:     ${detailsOfProduct.warranty}",
-                  context: context,
-                ),
-              ],
+                  SizedBox(
+                    height: HeightResolution.responsiveHeight(
+                        context: context, responsiveHeight: 0.05),
+                  ),
+                  _subLabelText(
+                    sublabelText: "Brand :          ${detailsOfProduct.brand}",
+                    context: context,
+                  ),
+                  SizedBox(
+                    height: HeightResolution.responsiveHeight(
+                        context: context, responsiveHeight: 0.01),
+                  ),
+                  _subLabelText(
+                    sublabelText: "Category:     ${detailsOfProduct.category}",
+                    context: context,
+                  ),
+                  SizedBox(
+                    height: HeightResolution.responsiveHeight(
+                        context: context, responsiveHeight: 0.1),
+                  ),
+                  _labelText(lableTitle: "Information", context: context),
+                  SizedBox(
+                    height: HeightResolution.responsiveHeight(
+                        context: context, responsiveHeight: 0.05),
+                  ),
+                  _subLabelText(
+                    sublabelText:
+                        "Description: ${detailsOfProduct.description}",
+                    context: context,
+                  ),
+                  SizedBox(
+                    height: HeightResolution.responsiveHeight(
+                        context: context, responsiveHeight: 0.05),
+                  ),
+                  _subLabelText(
+                    sublabelText: "Warrenty:     ${detailsOfProduct.warranty}",
+                    context: context,
+                  ),
+                  SizedBox(
+                    height: HeightResolution.responsiveHeight(
+                        context: context, responsiveHeight: 0.05),
+                  ),
+                  _subLabelText(
+                    sublabelText:
+                        "Deliver's in:     ${detailsOfProduct.deliversIn}",
+                    context: context,
+                  ),
+                ],
+              ),
             ),
           ),
         ],

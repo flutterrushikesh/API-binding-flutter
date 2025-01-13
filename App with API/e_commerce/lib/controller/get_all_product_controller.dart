@@ -1,10 +1,11 @@
 import 'dart:convert';
+import 'package:e_commerce/model/all_product_model.dart';
 import 'package:e_commerce/model/get_all_product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class GetAllProductController extends ChangeNotifier {
-  Future<List> getAllProducts() async {
+  Future<List<AllProductModel>> getAllProducts() async {
     Uri url = Uri.parse('https://dummyjson.com/products');
 
     http.Response response = await http.get(url);

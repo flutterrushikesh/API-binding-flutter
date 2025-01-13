@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:e_commerce/model/product_image_mode.dart';
 
 class AllProductModel {
@@ -17,7 +15,6 @@ class AllProductModel {
   List<ProductImageModel>? listOfProductImage;
 
   AllProductModel(Map<String, dynamic> productJson) {
-    log("IN ALL PRODUCT");
     id = productJson['id'];
     title = productJson['title'];
     description = productJson['description'];

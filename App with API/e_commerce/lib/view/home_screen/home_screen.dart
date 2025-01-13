@@ -1,37 +1,20 @@
-import 'dart:developer';
-
-import 'package:e_commerce/controller/get_all_product_controller.dart';
+import 'package:e_commerce/controller/add_to_cart_controller.dart';
+import 'package:e_commerce/view/cart_screen/cart_screen.dart';
 import 'package:e_commerce/view/home_screen/widgets/app_bar_title.dart';
 import 'package:e_commerce/view/home_screen/widgets/leading_widget.dart';
 import 'package:e_commerce/view/home_screen/widgets/pass_container.dart';
-import 'package:e_commerce/view/product_detail_screen/product_detail_screen.dart';
+import 'package:e_commerce/view/home_screen/widgets/product_grid_view.dart';
 import 'package:e_commerce/view/ui_helper/height_resolution.dart';
 import 'package:e_commerce/view/ui_helper/width_resolution.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  List products = [];
-
-  void getDataLocal() async {
-    log("GET LOCAL");
-    products =
-        await Provider.of<GetAllProductController>(context, listen: false)
-            .getAllProducts();
-    setState(() {});
-  }
-
-  @override
   Widget build(BuildContext context) {
-    getDataLocal();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -42,89 +25,60 @@ class _HomeScreenState extends State<HomeScreen> {
           PassContainer(),
         ],
       ),
-      body: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 0.76,
-          mainAxisSpacing: HeightResolution.responsiveHeight(
-              context: context, responsiveHeight: 0.03),
+      body: const ProductGridView(),
+      extendBody: true,
+      bottomNavigationBar: Container(
+        margin: EdgeInsets.symmetric(
+          vertical: HeightResolution.responsiveHeight(
+              context: context, responsiveHeight: 0.02),
+          horizontal: WidthResolution.responsiveWidth(
+              context: context, responsiveWidth: 0.043),
         ),
-        itemCount: products.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: WidthResolution.responsiveWidth(
-                context: context,
-                responsiveWidth: 0.05,
+        padding: EdgeInsets.symmetric(
+          vertical: HeightResolution.responsiveHeight(
+            context: context,
+            responsiveHeight: 0.02,
+          ),
+          horizontal: WidthResolution.responsiveWidth(
+              context: context, responsiveWidth: 0.041),
+        ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          color: Colors.red,
+        ),
+        child: GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const CartScreen()));
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "${Provider.of<AddToCartController>(context).listOfCartProducts.length}  |   ",
+                style: GoogleFonts.poppins(
+                  fontSize: WidthResolution.responsiveWidth(
+                    context: context,
+                    responsiveWidth: 0.041,
+                  ),
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
               ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) {
-                      return ProductDetailScreen(
-                        detailsOfProduct: products[index],
-                        indexOfImage: index,
-                      );
-                    }));
-                  },
-                  child: Image.network(
-                    products[index].listOfProductImage[0].imageURL,
-                    height: 176,
-                    width: 176,
+              Text(
+                "${Provider.of<AddToCartController>(context).itemTotal} \$",
+                style: GoogleFonts.poppins(
+                  fontSize: WidthResolution.responsiveWidth(
+                    context: context,
+                    responsiveWidth: 0.041,
                   ),
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
                 ),
-                Text(
-                  "${products[index].title}",
-                  style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.w500,
-                    fontSize: WidthResolution.responsiveWidth(
-                      context: context,
-                      responsiveWidth: 0.033,
-                    ),
-                  ),
-                ),
-                const Spacer(),
-                Row(
-                  children: [
-                    Text(
-                      "${products[index].price} \$",
-                      style: GoogleFonts.poppins(
-                        fontWeight: FontWeight.w600,
-                        fontSize: WidthResolution.responsiveWidth(
-                          context: context,
-                          responsiveWidth: 0.04,
-                        ),
-                      ),
-                    ),
-                    const Spacer(),
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: WidthResolution.responsiveWidth(
-                            context: context, responsiveWidth: 0.03),
-                        vertical: HeightResolution.responsiveHeight(
-                            context: context, responsiveHeight: 0.004),
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.circular(7),
-                      ),
-                      child: Text(
-                        "Add",
-                        style: GoogleFonts.poppins(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          );
-        },
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
